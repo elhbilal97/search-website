@@ -24,8 +24,7 @@ function searchRestaurants() {
     const service = new google.maps.places.PlacesService(map);
     service.findPlaceFromQuery(request, function(results, status) {
         if (status === google.maps.places.PlacesServiceStatus.OK) {
-            console.log(results);
-            // Trigger n8n workflow here with results (if needed)
+            console.log(results);  // Display the results in console (or trigger n8n here)
         } else {
             alert("No results found");
         }
