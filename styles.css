@@ -1,100 +1,54 @@
-/* General Reset */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+/* Cosmic Effect Styles */
+.cosmic-particle {
+    width: 15px;
+    height: 15px;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    animation: moveParticle 20s infinite;
 }
 
-/* Body Styling */
-body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f4f4f4;
-    color: #333;
-    margin: 0;
-    padding: 0;
+@keyframes moveParticle {
+    0% {
+        transform: translate(0, 0);
+    }
+    100% {
+        transform: translate(100px, 100px);
+    }
 }
 
-/* Header Styling */
-header {
+/* Hero background */
+.hero-background {
+    position: relative;
+    min-height: 100vh;
+    background: radial-gradient(circle, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 1));
+}
+
+/* Search Chip */
+.search-chip {
     background-color: #3b3b3b;
     color: white;
-    padding: 50px;
-    text-align: center;
-}
-
-header h1 {
-    font-size: 3em;
-    font-weight: bold;
-    margin-bottom: 10px;
-}
-
-header p {
-    font-size: 1.2em;
-}
-
-/* Search Section */
-#search {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 60vh;
-    background-color: #ffffff;
-    padding: 30px;
-    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
-    margin: 30px 10%;
-}
-
-#search input {
-    width: 70%;
-    padding: 15px;
-    font-size: 1.2em;
-    border-radius: 5px;
-    border: 2px solid #ccc;
-    margin-right: 10px;
-    transition: border-color 0.3s;
-}
-
-#search input:focus {
-    border-color: #4CAF50;
-}
-
-#search button {
-    padding: 15px 30px;
-    font-size: 1.2em;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 5px;
+    padding: 8px 15px;
+    margin: 5px;
+    border-radius: 25px;
     cursor: pointer;
     transition: background-color 0.3s;
 }
 
-#search button:hover {
-    background-color: #45a049;
+.search-chip:hover {
+    background-color: #4CAF50;
 }
 
-/* Footer Styling */
-footer {
-    text-align: center;
+/* Search Results */
+.search-results .result {
+    background-color: rgba(0, 0, 0, 0.6);
     padding: 15px;
-    background-color: #3b3b3b;
-    color: white;
-    font-size: 0.9em;
-    position: fixed;
-    width: 100%;
-    bottom: 0;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease-in-out;
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-    #search {
-        flex-direction: column;
-        margin: 20px;
-    }
-
-    #search input {
-        width: 100%;
-        margin-bottom: 10px;
-    }
+.search-results .result:hover {
+    background-color: rgba(76, 175, 80, 0.3);
+    box-shadow: 0px 4px 12px rgba(76, 175, 80, 0.3);
 }
