@@ -3,28 +3,74 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Restaurant Search</title>
+    <title>BuscaYa</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
-    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_API_KEY&libraries=places&callback=initAutocomplete" async defer></script>
+    <script src="script.js" defer></script>
 </head>
-<body>
-    <!-- Header Section -->
-    <header>
-        <h1>Find the Best Restaurants in Barcelona</h1>
-        <p>Use our search tool to discover the best dining spots!</p>
-    </header>
+<body class="bg-black text-white">
 
-    <!-- Search Section -->
-    <section id="search">
-        <input id="search-box" type="text" placeholder="Search for restaurants...">
-        <button onclick="searchRestaurants()">Search</button>
-    </section>
+    <!-- Background Elements -->
+    <div class="hero-background relative min-h-screen">
+        <div class="futuristic-grid absolute top-0 left-0 w-full h-full bg-repeat"></div>
+        <div class="stars absolute top-0 left-0 w-full h-full pointer-events-none z-10"></div>
 
-    <!-- Footer Section -->
-    <footer>
-        <p>&copy; 2025 Restaurant Search, All Rights Reserved</p>
+        <div class="cosmic-particle absolute top-10 left-20" style="animation-delay: 0s;"></div>
+        <div class="cosmic-particle absolute top-60 left-80" style="animation-delay: 5s;"></div>
+        <div class="cosmic-particle absolute top-80 left-30" style="animation-delay: 10s;"></div>
+
+        <!-- Header Section -->
+        <header class="sticky top-0 z-50 bg-black/20 backdrop-blur-sm border-b border-cyan-500/20">
+            <div class="max-w-6xl mx-auto px-6 py-4">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center space-x-8">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-8 h-8 bg-gradient-to-r from-cyan-500 to-purple-500 rounded-lg flex items-center justify-center text-white font-bold shadow-lg shadow-cyan-500/25">
+                                <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path d="M19 9l-7 7-7-7" /></svg>
+                            </div>
+                            <h1 class="text-xl font-bold gradient-text">BuscaYa</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Section -->
+        <main class="relative z-10">
+            <!-- Hero Section -->
+            <div class="text-center py-16 px-6 fade-in relative">
+                <h2 class="text-4xl md:text-6xl font-bold text-white mb-6 max-w-4xl mx-auto leading-tight">
+                    Obtén tu listado de <span class="gradient-text">opciones</span> en una simple búsqueda
+                </h2>
+                <p class="text-lg text-cyan-200/70 max-w-2xl mx-auto mb-12">
+                    No pierdas más tiempo filtrando resultados. Busca "restaurantes madrid" y obtén automáticamente los mejor valorados de Google Maps.
+                    Hoteles, spas, discotecas... todo con las mejores reseñas, al instante.
+                </p>
+
+                <!-- Search Interface -->
+                <div class="mb-8">
+                    <input type="text" id="search-box" class="px-4 py-2 rounded-lg text-black" placeholder="Buscar..." />
+                    <button class="bg-gradient-to-r from-cyan-500/20 to-purple-500/20 hover:from-cyan-500/30 hover:to-purple-500/30 text-cyan-300 px-4 py-2 rounded-full text-sm transition-all backdrop-blur-sm border border-cyan-500/30 shadow-lg shadow-cyan-500/10" onclick="startSearch()">Buscar</button>
+                </div>
+
+                <!-- Trending Searches -->
+                <div class="flex flex-wrap justify-center gap-2 max-w-2xl mx-auto">
+                    <span class="text-cyan-300/60 text-sm mr-2">Consultas populares:</span>
+                    <button class="search-chip">Restaurantes en Madrid</button>
+                    <button class="search-chip">Spas en Barcelona</button>
+                    <button class="search-chip">Cafés en Sevilla</button>
+                </div>
+            </div>
+
+            <!-- Search Results -->
+            <div id="search-results" class="max-w-4xl mx-auto px-6 mb-8 slide-up"></div>
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <footer class="text-center py-4 bg-black/20 backdrop-blur-sm">
+        <p>&copy; 2025 BuscaYa, Todos los derechos reservados.</p>
     </footer>
 
-    <script src="script.js"></script>
 </body>
 </html>
