@@ -8,15 +8,21 @@
     <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_API_KEY&libraries=places&callback=initAutocomplete" async defer></script>
 </head>
 <body>
+    <!-- Header Section -->
     <header>
         <h1>Find the Best Restaurants in Barcelona</h1>
+        <p>Use our search tool to discover the best dining spots!</p>
     </header>
-    <section>
+
+    <!-- Search Section -->
+    <section id="search">
         <input id="search-box" type="text" placeholder="Search for restaurants...">
         <button onclick="searchRestaurants()">Search</button>
     </section>
+
+    <!-- Footer Section -->
     <footer>
-        <p>Powered by Google Maps and n8n</p>
+        <p>&copy; 2025 Restaurant Search, All Rights Reserved</p>
     </footer>
 
     <script src="script.js"></script>
