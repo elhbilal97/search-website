@@ -6,9 +6,8 @@
     <title>BuscaYa</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDbN270qu5S8pZ85kuck-oi8_Vp4oSlCYY&libraries=places" defer></script>
     <script src="script.js" defer></script>
-    <!-- Google Maps API Script -->
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDbN270qu5S8pZ85kuck-oi8_Vp4oSlCYY&libraries=places"></script>
 </head>
 <body class="bg-black text-white">
 
@@ -73,39 +72,6 @@
     <footer class="text-center py-4 bg-black/20 backdrop-blur-sm">
         <p>&copy; 2025 BuscaYa, Todos los derechos reservados.</p>
     </footer>
-
-    <!-- Script para Google Maps API -->
-    <script>
-        function startSearch(query) {
-            if (!query) {
-                query = document.getElementById('search-box').value; // Si no se pasa un query, toma el valor del input
-            }
-
-            const resultsContainer = document.getElementById('search-results');
-            resultsContainer.innerHTML = ''; // Limpiar resultados anteriores
-
-            if (query.length > 0) {
-                const service = new google.maps.places.PlacesService(document.createElement('div'));
-
-                service.textSearch({ query: query }, (results, status) => {
-                    if (status === google.maps.places.PlacesServiceStatus.OK) {
-                        results.forEach(result => {
-                            const resultElement = document.createElement('div');
-                            resultElement.classList.add('result');
-                            resultElement.innerHTML = `
-                                <h4 class="text-white">${result.name}</h4>
-                                <p class="text-cyan-200/70 text-sm">${result.formatted_address}</p>
-                                <p class="text-cyan-200/70 text-sm">Rating: ${result.rating} (${result.user_ratings_total} reviews)</p>
-                            `;
-                            resultsContainer.appendChild(resultElement);
-                        });
-                    } else {
-                        resultsContainer.innerHTML = `<p>No se encontraron resultados.</p>`;
-                    }
-                });
-            }
-        }
-    </script>
 
 </body>
 </html>
