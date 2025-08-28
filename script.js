@@ -1,28 +1,26 @@
 // Función para iniciar la búsqueda cuando se hace clic en "Buscar"
-function startSearch() {
-    const searchBox = document.getElementById('search-box');  // Captura el valor del input
-    const query = searchBox.value;  // Guarda la búsqueda del usuario
-
-    // Verifica que el campo de búsqueda no esté vacío
+function startSearch(query) {
     if (!query) {
-        alert('Por favor, ingresa un término de búsqueda.');
-        return;
+        query = document.getElementById('search-box').value; // Si no se pasa un query, toma el valor del input
     }
 
-    // Inicializa el servicio de Places de Google Maps
-    const service = new google.maps.places.PlacesService(document.createElement('div'));  // Crea un div "fantasma" para la API
+    const resultsContainer = document.getElementById('search-results');
+    resultsContainer.innerHTML = ''; // Limpiar resultados anteriores
 
-    // Realiza la búsqueda de lugares en Google Maps
-    service.textSearch({
-        query: query,  // Lo que el usuario ha buscado
-        fields: ['name', 'formatted_address', 'rating', 'user_ratings_total'],  // Solo los campos que necesitas
-    }, function(results, status) {
-        if (status === google.maps.places.PlacesServiceStatus.OK) {
-            displayResults(results);  // Si la búsqueda es exitosa, llama a la función que muestra los resultados
-        } else {
-            alert('No se pudieron obtener los resultados. Error: ' + status);  // Si algo falla, muestra el error
-        }
-    });
+    if (query.length > 0) {
+        const service = new google.maps.places.PlacesService(document.createElement('div')); // Crea un div "fantasma" para la API
+
+        service.textSearch({
+            query: query,  // Lo que el usuario ha buscado
+            fields: ['name', 'formatted_address', 'rating', 'user_ratings_total'],  // Solo los campos que necesitas
+        }, function(results, status) {
+            if (status === google.maps.places.PlacesServiceStatus.OK) {
+                displayResults(results);  // Si la búsqueda es exitosa, llama a la función que muestra los resultados
+            } else {
+                alert('No se pudieron obtener los resultados. Error: ' + status);  // Si algo falla, muestra el error
+            }
+        });
+    }
 }
 
 // Función para mostrar los resultados en el contenedor
