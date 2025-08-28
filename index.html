@@ -7,6 +7,8 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <script src="script.js" defer></script>
+    <!-- Google Maps API Script -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDbN270qu5S8pZ85kuck-oi8_Vp4oSlCYY&libraries=places"></script>
 </head>
 <body class="bg-black text-white">
 
@@ -56,9 +58,9 @@
                 <!-- Trending Searches -->
                 <div class="flex flex-wrap justify-center gap-2 max-w-2xl mx-auto">
                     <span class="text-cyan-300/60 text-sm mr-2">Consultas populares:</span>
-                    <button class="search-chip">Restaurantes en Madrid</button>
-                    <button class="search-chip">Spas en Barcelona</button>
-                    <button class="search-chip">Cafés en Sevilla</button>
+                    <button class="search-chip" onclick="startSearch('Restaurantes en Madrid')">Restaurantes en Madrid</button>
+                    <button class="search-chip" onclick="startSearch('Spas en Barcelona')">Spas en Barcelona</button>
+                    <button class="search-chip" onclick="startSearch('Cafés en Sevilla')">Cafés en Sevilla</button>
                 </div>
             </div>
 
@@ -73,7 +75,37 @@
     </footer>
 
     <!-- Script para Google Maps API -->
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDbN270qu5S8pZ85kuck-oi8_Vp4oSlCYY&libraries=places"></script>
+    <script>
+        function startSearch(query) {
+            if (!query) {
+                query = document.getElementById('search-box').value; // Si no se pasa un query, toma el valor del input
+            }
+
+            const resultsContainer = document.getElementById('search-results');
+            resultsContainer.innerHTML = ''; // Limpiar resultados anteriores
+
+            if (query.length > 0) {
+                const service = new google.maps.places.PlacesService(document.createElement('div'));
+
+                service.textSearch({ query: query }, (results, status) => {
+                    if (status === google.maps.places.PlacesServiceStatus.OK) {
+                        results.forEach(result => {
+                            const resultElement = document.createElement('div');
+                            resultElement.classList.add('result');
+                            resultElement.innerHTML = `
+                                <h4 class="text-white">${result.name}</h4>
+                                <p class="text-cyan-200/70 text-sm">${result.formatted_address}</p>
+                                <p class="text-cyan-200/70 text-sm">Rating: ${result.rating} (${result.user_ratings_total} reviews)</p>
+                            `;
+                            resultsContainer.appendChild(resultElement);
+                        });
+                    } else {
+                        resultsContainer.innerHTML = `<p>No se encontraron resultados.</p>`;
+                    }
+                });
+            }
+        }
+    </script>
+
 </body>
 </html>
-
