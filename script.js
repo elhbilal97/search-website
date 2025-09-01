@@ -9,8 +9,8 @@ function startSearch(query = '') {
     resultsContainer.innerHTML = ''; // Limpiar resultados anteriores
 
     if (query.length > 0) {
-        // URL del Webhook de n8n
-        const webhookUrl = 'https://<tu-servidor>/webhook/search';  // Asegúrate de reemplazar con tu URL del Webhook de n8n
+        // URL de tu Webhook en n8n
+        const webhookUrl = 'https://tu-servidor-n8n/webhook/search';  // Reemplaza esto con la URL de tu Webhook de n8n
 
         // Enviar el texto de búsqueda a n8n a través de POST
         fetch(webhookUrl, {
@@ -18,12 +18,12 @@ function startSearch(query = '') {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ query: query })
+            body: JSON.stringify({ query: query })  // Enviar el query en formato JSON
         })
         .then(response => response.json())
         .then(data => {
             // Cuando n8n devuelva los resultados, los mostramos
-            displayResults(data.results); // Aquí, asumimos que n8n devuelve los resultados como una propiedad 'results'
+            displayResults(data.results); // Aquí, asumimos que n8n devuelve los resultados en 'results'
         })
         .catch(error => {
             console.error("Error:", error);
@@ -35,7 +35,7 @@ function startSearch(query = '') {
 // Función para mostrar los resultados en el contenedor
 function displayResults(results) {
     const resultsContainer = document.getElementById('search-results');
-    resultsContainer.innerHTML = ''; // Limpiar los resultados anteriores
+    resultsContainer.innerHTML = '';  // Limpiar los resultados anteriores
 
     // Si no hay resultados, mostrar un mensaje
     if (!results || results.length === 0) {
@@ -49,3 +49,16 @@ function displayResults(results) {
             const resultElement = document.createElement('div');
             resultElement.classList.add('result');
             resultElement.innerHTML = `
+                <h4 class="text-white">${result.name}</h4>
+                <p class="text-cyan-200/70 text-sm">${result.formatted_address}</p>
+                <p class="text-cyan-200/70 text-sm">Rating: ${result.rating} (${result.user_ratings_total} reseñas)</p>
+            `;
+            resultsContainer.appendChild(resultElement);  // Agrega el nuevo resultado al contenedor
+        }
+    });
+
+    // Si no hay resultados que cumplen con los filtros, mostrar un mensaje
+    if (resultsContainer.children.length === 0) {
+        resultsContainer.innerHTML = '<p>No se encontraron resultados que coincidan con los filtros.</p>';
+    }
+}
